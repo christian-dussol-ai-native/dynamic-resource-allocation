@@ -1,0 +1,32 @@
+# ResourceClaimTemplate demonstrating Prioritized List (firstAvailable).
+#
+# This is the v1.36 Haru pattern showcased on slide 6 of the carousel:
+#   "Give me an H100. Fall back to A100. Then to L4."
+#
+# How firstAvailable works:
+#   - The scheduler tries each entry in order
+#   - It picks the FIRST one where a matching device is available
+#   - If none match, the pod stays Pending until something matches
+#
+# Verify on Saturday:
+#   - Exact API version (resource.k8s.io/v1 in v1.36, but check the cluster)
+#   - The "firstAvailable" field name and its position in the spec
+#   - Whether sub-request "name" fields are required or optional
+
+---
+apiVersion: resource.k8s.io/v1
+kind: ResourceClaimTemplate
+metadata:
+  name: gpu-cascade
+spec:
+  spec:
+    devices:
+      requests:
+        - name: gpu
+          firstAvailable:
+            - name: prefer-h100
+              deviceClassName: mock-h100
+            - name: fallback-a100
+              deviceClassName: mock-a100
+            - name: fallback-l4
+              deviceClassName: mock-l4

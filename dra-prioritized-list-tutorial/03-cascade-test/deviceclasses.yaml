@@ -1,0 +1,54 @@
+# Three DeviceClasses simulating an H100/A100/L4 tier cascade.
+#
+# In production, these would map to real NVIDIA GPU classes with selectors
+# on actual hardware attributes (compute capability, memory, topology).
+# Here, they all filter the SAME mock GPUs from the example driver — what
+# differs is the selector criteria, which lets us demonstrate Prioritized List.
+#
+# Verify on Saturday:
+#   - The exact attribute names exposed by the example driver
+#     (run: kubectl get resourceslices -o yaml | grep -A 20 "attributes:")
+#   - The right field name (likely "model" or "type") and values published
+#     (likely something like "LATEST-GPU-MODEL" or numeric tiers)
+#   - If selectors don't match, the cascade may fail with "no devices available"
+#
+# Tip: if needed, simplify by making mock-a100 and mock-l4 selectorless
+# (matching ANY device with driver "gpu.example.com") to guarantee fallback.
+
+---
+apiVersion: resource.k8s.io/v1
+kind: DeviceClass
+metadata:
+  name: mock-h100
+spec:
+  selectors:
+    - cel:
+        # Top tier: highest-capability mock GPU
+        # Adjust attribute path based on what the driver actually publishes
+        expression: |
+          device.driver == "gpu.example.com" &&
+          device.attributes["gpu.example.com"].model == "LATEST-GPU-MODEL"
+
+---
+apiVersion: resource.k8s.io/v1
+kind: DeviceClass
+metadata:
+  name: mock-a100
+spec:
+  selectors:
+    - cel:
+        # Middle tier: any mock GPU (broader match)
+        expression: |
+          device.driver == "gpu.example.com"
+
+---
+apiVersion: resource.k8s.io/v1
+kind: DeviceClass
+metadata:
+  name: mock-l4
+spec:
+  selectors:
+    - cel:
+        # Lowest tier: catch-all
+        expression: |
+          device.driver == "gpu.example.com"

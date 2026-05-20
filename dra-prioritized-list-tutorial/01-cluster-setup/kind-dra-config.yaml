@@ -1,0 +1,35 @@
+# Multi-node Kind cluster configured for DRA testing
+#
+# Cluster topology: 1 control-plane + 2 workers
+# Why multi-node: ResourceSlices are published per-node, so having multiple
+# workers makes the allocation behavior more realistic.
+#
+# Feature gates:
+#   - DynamicResourceAllocation: enables the DRA API (GA in v1.34, on by default)
+#   - DRAPrioritizedList: enables firstAvailable in ResourceClaims
+#     - Alpha in v1.33-1.35 (requires this gate)
+#     - Beta-by-default in v1.36+ (gate optional but harmless to keep)
+#
+# Verify on Saturday:
+#   - Exact feature gate name for Prioritized List
+#     (may be DRAPrioritizedAlternatives in some K8s versions)
+#   - Whether DynamicResourceAllocation gate is still needed in 1.36+
+#
+# Adapt the image tag to your environment:
+#   - kindest/node:v1.35.1 (current stable)
+#   - kindest/node:v1.36.x (once available)
+
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+
+featureGates:
+  DynamicResourceAllocation: true
+  DRAPrioritizedList: true
+
+runtimeConfig:
+  "resource.k8s.io/v1": "true"
+
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker

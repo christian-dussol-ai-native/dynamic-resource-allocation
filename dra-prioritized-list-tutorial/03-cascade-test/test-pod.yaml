@@ -1,0 +1,26 @@
+# A minimal pod that consumes the gpu-cascade ResourceClaimTemplate.
+#
+# We use a pause container because we're not actually running any GPU
+# workload — we just want to observe the scheduler matching and allocating
+# devices through the DRA path.
+#
+# Verify on Saturday:
+#   - The resourceClaims field syntax (template vs direct claim)
+#   - Whether "claims" inside resources is the correct field
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dra-cascade-test
+spec:
+  restartPolicy: Never
+  containers:
+    - name: workload
+      image: registry.k8s.io/pause:3.10
+      resources:
+        claims:
+          - name: gpu
+  resourceClaims:
+    - name: gpu
+      resourceClaimTemplateName: gpu-cascade
