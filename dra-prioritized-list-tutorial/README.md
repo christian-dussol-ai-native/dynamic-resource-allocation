@@ -23,7 +23,7 @@ In March 2026 at KubeCon Europe, NVIDIA donated their DRA driver to the CNCF: a 
 
 DRA went GA in  K8s v1.34. 
 
-In v1.36 "Haru", multiple DRA features flip to Beta-by-default, including **Prioritized List**: the pattern that lets you declare:
+In v1.36 "Haru", DRA Prioritized List became **GA (Generally Available)**: the pattern that lets you declare:
 
 > *"Give me an H100. Fall back to A100. Then to L4."*
 
@@ -347,7 +347,7 @@ kind delete cluster --name dra-test
 
 This tutorial stands on the shoulders of **Kubernetes SIG Node**, which maintains the `dra-example-driver` and the broader DRA subsystem.
 
-SIG Node is the home of the Dynamic Resource Allocation work from the original KEP-3063 in 2022, through Alpha, Beta, GA in v1.34, and the Beta-by-default features that landed in v1.36 "Haru". None of what this repository demonstrates would be possible without their sustained, multi-year effort.
+SIG Node is the home of the Dynamic Resource Allocation work from the original KEP-3063 in 2022, through Alpha, Beta, GA in v1.34, and further GA features including Prioritized List in v1.36 "Haru". None of what this repository demonstrates would be possible without their sustained, multi-year effort.
 
 If you find this tutorial useful, consider engaging with SIG Node directly:
 
