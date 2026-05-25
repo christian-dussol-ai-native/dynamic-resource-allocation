@@ -5,12 +5,6 @@
 # This driver simulates GPUs without requiring any hardware. It publishes
 # ResourceSlices that describe mock devices, participates in the DRA allocation
 # cycle, but does NOT run any real GPU workload.
-#
-# Verify on Saturday:
-#   - Exact installation method (the upstream README may have changed)
-#   - Whether cert-manager is required (for the driver's admission webhook)
-#   - Driver version aligned with your Kubernetes version
-#     (v0.1.0 -> K8s 1.32, v0.2.0 -> 1.33, v0.3.0 -> 1.34, main -> latest)
 
 set -euo pipefail
 

@@ -12,11 +12,6 @@
 #
 # This demonstrates the core promise of Prioritized List:
 # declarative heterogeneity-aware allocation.
-#
-# Verify on Saturday:
-#   - That the scheduler actually descends the cascade as DeviceClasses
-#     are removed. If the pod stays Pending instead, document the behavior
-#     and adjust the script.
 
 set -euo pipefail
 

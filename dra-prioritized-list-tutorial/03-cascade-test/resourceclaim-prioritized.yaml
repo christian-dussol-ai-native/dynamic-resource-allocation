@@ -7,11 +7,6 @@
 #   - The scheduler tries each entry in order
 #   - It picks the FIRST one where a matching device is available
 #   - If none match, the pod stays Pending until something matches
-#
-# Verify on Saturday:
-#   - Exact API version (resource.k8s.io/v1 in v1.36, but check the cluster)
-#   - The "firstAvailable" field name and its position in the spec
-#   - Whether sub-request "name" fields are required or optional
 
 ---
 apiVersion: resource.k8s.io/v1

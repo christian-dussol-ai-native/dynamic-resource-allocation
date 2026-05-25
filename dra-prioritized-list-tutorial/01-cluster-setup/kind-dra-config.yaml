@@ -10,11 +10,6 @@
 #     - Alpha in v1.33-1.35 (requires this gate)
 #     - Beta-by-default in v1.36+ (gate optional but harmless to keep)
 #
-# Verify on Saturday:
-#   - Exact feature gate name for Prioritized List
-#     (may be DRAPrioritizedAlternatives in some K8s versions)
-#   - Whether DynamicResourceAllocation gate is still needed in 1.36+
-#
 # Adapt the image tag to your environment:
 #   - kindest/node:v1.35.1 (current stable)
 #   - kindest/node:v1.36.x (once available)

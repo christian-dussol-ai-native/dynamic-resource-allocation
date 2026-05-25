@@ -5,13 +5,6 @@
 # Here, they all filter the SAME mock GPUs from the example driver — what
 # differs is the selector criteria, which lets us demonstrate Prioritized List.
 #
-# Verify on Saturday:
-#   - The exact attribute names exposed by the example driver
-#     (run: kubectl get resourceslices -o yaml | grep -A 20 "attributes:")
-#   - The right field name (likely "model" or "type") and values published
-#     (likely something like "LATEST-GPU-MODEL" or numeric tiers)
-#   - If selectors don't match, the cascade may fail with "no devices available"
-#
 # Tip: if needed, simplify by making mock-a100 and mock-l4 selectorless
 # (matching ANY device with driver "gpu.example.com") to guarantee fallback.
 

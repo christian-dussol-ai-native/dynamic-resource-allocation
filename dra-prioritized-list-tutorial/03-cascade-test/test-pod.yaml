@@ -3,11 +3,6 @@
 # We use a pause container because we're not actually running any GPU
 # workload — we just want to observe the scheduler matching and allocating
 # devices through the DRA path.
-#
-# Verify on Saturday:
-#   - The resourceClaims field syntax (template vs direct claim)
-#   - Whether "claims" inside resources is the correct field
-
 ---
 apiVersion: v1
 kind: Pod
